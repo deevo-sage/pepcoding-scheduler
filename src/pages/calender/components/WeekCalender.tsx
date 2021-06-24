@@ -22,15 +22,6 @@ const WeekCalender: React.FunctionComponent<{
           const end = moment(item.endTime);
           const start = moment(item.startTime);
           count[start.day() - 1] += 1;
-          // if (start.day() === 3)
-          //   console.log({
-          //     gridArea: `${count[start.day() - 1] - 1} /${start.day()} / ${
-          //       count[start.day() - 1]
-          //     }${start.day() + 1}`,
-          //     // gridRow: `${count[start.day() - 1] - 1} / span 1`,
-          //     // gridColumn: `${start.day()} / span 1`,
-          //   });
-          // console.log(count);
           return (
             <div
               key={`${end}`}
@@ -38,16 +29,18 @@ const WeekCalender: React.FunctionComponent<{
                 gridArea: `${
                   count[start.day() - 1]
                 } /${start.day()} / span 1 / span 1`,
-                //  gridRow: `${count[start.day() - 1] - 1} / span 1`,
-                //   gridColumn: `${start.day()} / span 1`,
               }}
             >
               {" "}
               <b> {item.name}</b> <br />
               <b>
                 {" "}
-                {item.subject} (
-                {start.format("hh:mm") + "-" + end.format("hh:mm")} )
+                {item.subject === "JavaScript"
+                  ? "JS"
+                  : item.subject === "python"
+                  ? "Py"
+                  : item.subject}{" "}
+                ({start.format("hh:mm") + "-" + end.format("hh:mm")} )
               </b>{" "}
             </div>
           );

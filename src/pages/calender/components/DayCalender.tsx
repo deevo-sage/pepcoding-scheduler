@@ -52,7 +52,11 @@ const DayCalender: React.FunctionComponent<{
               <b> {item.name}</b> <br />
               <b>
                 {" "}
-                {item.subject}
+                {item.subject === "JavaScript"
+                  ? "JS"
+                  : item.subject === "python"
+                  ? "Py"
+                  : item.subject}
                 <span>
                   ({start.format("hh:mm") + "-" + end.format("hh:mm")})
                 </span>{" "}

@@ -239,7 +239,10 @@ const Calender: React.FunctionComponent<calenderinterface> = ({ teachers }) => {
             <Mycalenders.MonthCalender
               list={Wclasses.filter((item) => {
                 const time = moment(item.startTime);
-                return time.month() + 1 === dated[1];
+                if (!item.repeating) return time.month() + 1 === dated[1];
+                else {
+                  return true;
+                }
               })}
               dated={dated}
             />

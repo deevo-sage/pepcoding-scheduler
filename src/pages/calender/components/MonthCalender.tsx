@@ -28,7 +28,14 @@ const MonthCalender: React.FunctionComponent<{
     temp.forEach((item, key) => {
       const time = moment(item.startTime);
       // console.log(time.date() + day - 2);
-      main[time.date() + day - 1].push(item);
+      if (item.repeating) {
+        for (let i = 1; i <= day + dated[4].daysInMonth(); i++) {
+          if (time.day() === i % 7) {
+            main[i].push(item);
+            console.log(time.day(), time.date());
+          }
+        }
+      } else main[time.date() + day - 1].push(item);
     });
     // console.log(main);
 
@@ -56,8 +63,12 @@ const MonthCalender: React.FunctionComponent<{
                     timee = moment(item.endTime);
                   return (
                     <div key={item.name + item.subject + key}>
-                      {item.subject}(
-                      {times.format("hh:mm") + "-" + timee.format("hh:mm")})
+                      {item.subject === "JavaScript"
+                        ? "JS"
+                        : item.subject === "python"
+                        ? "Py"
+                        : item.subject}
+                      ({times.format("hh:mm") + "-" + timee.format("hh:mm")})
                     </div>
                   );
                 })}
