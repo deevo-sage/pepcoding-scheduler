@@ -30,16 +30,28 @@ const Calender: React.FunctionComponent<calenderinterface> = ({ teachers }) => {
     }
   }, [teachers]);
   React.useEffect(() => {
-    if (teacher.name != null)
-      actions.classaction
-        .getteacher(teacher.id)
-        .then((item) => {
-          console.log(item.data.classes);
-          setWclasses(item.data.classes);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    if (teacher.name != null) {
+      if (teacher.name === "all") {
+        actions.classaction
+          .getall()
+          .then((item) => {
+            console.log(item.data.classes);
+            setWclasses(item.data.classes);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else
+        actions.classaction
+          .getteacher(teacher.id)
+          .then((item) => {
+            console.log(item.data.classes);
+            setWclasses(item.data.classes);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    }
   }, [teacher]);
   React.useEffect(() => {
     let x = [0, 0];
@@ -67,11 +79,15 @@ const Calender: React.FunctionComponent<calenderinterface> = ({ teachers }) => {
             value={teacher.name != null ? teacher.id : ""}
             onChange={(e) => {
               // console.log(teachers.filter((t) => t.id == e.target.value)[0]);
-              setTeacher(
-                teachers.filter((t) => t.id.toString() == e.target.value)[0]
-              );
+              if (e.target.value === "all") {
+                setTeacher({ id: 9999, name: "all", subject: "all" });
+              } else
+                setTeacher(
+                  teachers.filter((t) => t.id.toString() == e.target.value)[0]
+                );
             }}
           >
+            <option value="all">All</option>
             {teachers.map(({ id, name }, key) => {
               return (
                 <option

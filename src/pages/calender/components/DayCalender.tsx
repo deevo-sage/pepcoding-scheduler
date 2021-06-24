@@ -22,7 +22,6 @@ const DayCalender: React.FunctionComponent<{
         return timeae.hour() - timeas.hour() - timebe.hour() + timebs.hour();
       });
     setdaylist(temp);
-    console.log(list);
   }, [list]);
   return (
     <div className="dayCalender">
@@ -66,6 +65,3 @@ const DayCalender: React.FunctionComponent<{
   );
 };
 export default DayCalender;
-const onhovercontent: React.FunctionComponent<any> = () => {
-  return <div></div>;
-};
