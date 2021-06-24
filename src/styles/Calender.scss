@@ -20,7 +20,6 @@
   display: flex;
   flex-direction: column;
   .calenderTopBar {
-    padding: 0.5rem;
     background-color: $bG200;
     display: flex;
     font-size: 18px;
@@ -34,9 +33,285 @@
       background-color: transparent;
       border: none;
     }
+    .buttonGroup {
+      position: relative;
+      z-index: 0;
+      flex: 0.3;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+
+      transform: translateY(5px);
+      div {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2.5rem;
+        width: 130px;
+        z-index: 2;
+        font-weight: 600;
+        user-select: none;
+        background-color: $cyan300;
+        clip-path: polygon(17% 0, 80% 0%, 100% 100%, 0 100%);
+        box-shadow: 4px 4px 20px rgba(0, 0, 0, 1);
+
+        cursor: pointer;
+        user-select: none;
+        &:hover {
+          opacity: 0.7;
+        }
+        &:active {
+          opacity: 0.3;
+        }
+      }
+      div:nth-child(2) {
+        transform: translate(-20%);
+      }
+      div:nth-child(3) {
+        transform: translate(-40%);
+      }
+      .active {
+        background-color: $cyan100;
+        z-index: 3;
+      }
+    }
   }
   .calenderMain {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    background-color: $bG500;
+    .dayCalender {
+      display: flex;
+      box-sizing: content-box;
+      width: 100%;
+      flex-direction: column;
+      height: 100%;
+      .calenderTop {
+        background-color: rgb(184, 184, 184);
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        & > div {
+          text-align: center;
+          padding: 1rem 0rem;
+          flex: 1;
+          border: 1px dashed black;
+        }
+      }
+      .calenderGrid {
+        height: 500px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(14, 1fr);
+        grid-template-rows: repeat(12, 1fr);
+        grid-column-gap: 2px;
+        grid-row-gap: 2px;
+        & > div {
+          background-color: aqua;
+          // grid-column: 1 / span 6;
+          font-size: 12px;
+          text-align: center;
+
+          border-radius: 30px;
+        }
+      }
+    }
+    .monthCalender {
+      display: flex;
+      box-sizing: content-box;
+      width: 100%;
+      flex-direction: column;
+      height: 100%;
+      .calenderTop {
+        background-color: rgb(184, 184, 184);
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        & > div {
+          text-align: center;
+          padding: 1rem 0rem;
+          flex: 1;
+          border: 1px dashed black;
+        }
+      }
+      .calenderGrid {
+        height: 500px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(14, 1fr);
+        grid-template-rows: repeat(12, 1fr);
+        grid-column-gap: 2px;
+        grid-row-gap: 2px;
+        & > div {
+          background-color: aqua;
+          // grid-column: 1 / span 6;
+          font-size: 12px;
+          text-align: center;
+
+          border-radius: 30px;
+        }
+      }
+    }
+  }
+}
+.DcalenderGrid {
+  height: 500px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  grid-column-gap: 2px;
+  grid-row-gap: 2px;
+  & > div {
+    
+    background-color: aqua;
+    // grid-column: 1 / span 6;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    text-align: center;
+
+    border-radius: 30px;
+  }
+}
+.WcalenderGrid {
+  height: 500px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  grid-column-gap: 2px;
+  grid-row-gap: 2px;
+  & > div {
+    background-color: aqua;
+    // grid-column: 1 / span 6;
+    font-size: 12px;
+    text-align: center;
+
+    border-radius: 30px;
+  }
+}
+.McalenderGrid {
+  height: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  & > div {
+    flex-basis: 14.28%;
+    height: 20%;
+    background-color: aqua;
+    // grid-column: 1 / span 6;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px dashed black;
+    .monthtop {
+      width: 100%;
+      padding-left: 0.5rem;
+      text-align: left;
+      flex: 0.1;
+    }
+    .monthbottom {
+      width: 100%;
+      overflow-y: scroll;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}
+.modalButton {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 50;
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-color: $bG100;
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:active {
+    opacity: 0.3;
+  }
+}
+.modalForm {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .close {
+    align-items: flex-end;
+    & > div {
+      width: 2rem;
+      height: 2rem;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      user-select: none;
+      transform: rotate(45deg);
+      &:hover {
+        opacity: 0.7;
+      }
+      &:active {
+        opacity: 0.3;
+      }
+    }
+  }
+  .formbody {
+    justify-content: center;
+    align-items: center;
     flex: 1;
-    background-color: $bG300;
+    gap: 5px;
+    & > div {
+      font-size: 12px;
+      font-weight: 700;
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      justify-content: center;
+      gap: 5px;
+      span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+    .buttoncont {
+      align-items: center;
+      .submitButton {
+        padding: 0.3rem;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 700;
+        background-color: cadetblue;
+        cursor: pointer;
+        user-select: none;
+        &:hover {
+          opacity: 0.7;
+        }
+        &:active {
+          opacity: 0.3;
+        }
+      }
+    }
   }
 }
