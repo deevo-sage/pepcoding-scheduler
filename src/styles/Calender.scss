@@ -1,7 +1,8 @@
 @import "colors";
 .topBar {
-  padding: 0.5rem;
-  background-color: $bG200;
+  border-radius: 25px 25px 0 0;
+  padding: 0.5rem 1rem;
+  background-color: $yellow;
   display: flex;
   font-size: 18px;
   justify-content: space-between;
@@ -20,7 +21,8 @@
   display: flex;
   flex-direction: column;
   .calenderTopBar {
-    background-color: $bG200;
+    background-color: $yellow;
+    padding: 0 0.5rem;
     display: flex;
     font-size: 18px;
     justify-content: space-between;
@@ -52,10 +54,8 @@
         z-index: 2;
         font-weight: 600;
         user-select: none;
-        background-color: $cyan300;
+        background-color: $orange;
         clip-path: polygon(17% 0, 80% 0%, 100% 100%, 0 100%);
-        box-shadow: 4px 4px 20px rgba(0, 0, 0, 1);
-
         cursor: pointer;
         user-select: none;
         &:hover {
@@ -72,16 +72,19 @@
         transform: translate(-40%);
       }
       .active {
-        background-color: $cyan100;
+        background-color: $crimson;
+        color: $bG50;
         z-index: 3;
       }
     }
   }
   .calenderMain {
+    border-radius: 0 0 25px 25px;
+    overflow: hidden;
     position: relative;
     z-index: 10;
     display: flex;
-    background-color: $bG500;
+    background-color: $bG50;
     .dayCalender {
       display: flex;
       box-sizing: content-box;
@@ -89,7 +92,8 @@
       flex-direction: column;
       height: 100%;
       .calenderTop {
-        background-color: rgb(184, 184, 184);
+        background-color: $yellow;
+        font-weight: 700;
         width: 100%;
         display: flex;
         justify-content: space-around;
@@ -97,7 +101,9 @@
           text-align: center;
           padding: 1rem 0rem;
           flex: 1;
-          border: 1px dashed black;
+          border: 1.5px solid black;
+          border-top: 2px solid black;
+          border-bottom: 2px solid black;
         }
       }
       .calenderGrid {
@@ -125,32 +131,17 @@
       flex-direction: column;
       height: 100%;
       .calenderTop {
-        background-color: rgb(184, 184, 184);
+        background-color: $yellow;
         width: 100%;
+        font-weight: 700;
         display: flex;
         justify-content: space-around;
         & > div {
           text-align: center;
           padding: 1rem 0rem;
           flex: 1;
-          border: 1px dashed black;
-        }
-      }
-      .calenderGrid {
-        height: 500px;
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(14, 1fr);
-        grid-template-rows: repeat(12, 1fr);
-        grid-column-gap: 2px;
-        grid-row-gap: 2px;
-        & > div {
-          background-color: aqua;
-          // grid-column: 1 / span 6;
-          font-size: 12px;
-          text-align: center;
-
-          border-radius: 30px;
+          border: 1.5px solid black;
+          border-top: 2px solid black;
         }
       }
     }
@@ -165,9 +156,11 @@
   grid-column-gap: 2px;
   grid-row-gap: 2px;
   & > div {
-    
-    background-color: aqua;
-    // grid-column: 1 / span 6;
+    margin-top: 2px;
+    background-color: $cyan700;
+    * {
+      color: $bG50;
+    } // grid-column: 1 / span 6;
     font-size: 12px;
     text-overflow: ellipsis;
     text-align: center;
@@ -184,7 +177,11 @@
   grid-column-gap: 2px;
   grid-row-gap: 2px;
   & > div {
-    background-color: aqua;
+    margin-top: 2px;
+    background-color: $cyan700;
+    * {
+      color: $bG50;
+    }
     // grid-column: 1 / span 6;
     font-size: 12px;
     text-align: center;
@@ -198,16 +195,23 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
+  .hasClass {
+    background-color: $bG50;
+  }
+  .notInMonth {
+    background-color: $bG300;
+  }
   & > div {
     flex-basis: 14.28%;
     height: 20%;
-    background-color: aqua;
+    background-color: $bG100;
     // grid-column: 1 / span 6;
     font-size: 12px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border: 1px dashed black;
+    border: 1.5px solid black;
     .monthtop {
       width: 100%;
       padding-left: 0.5rem;

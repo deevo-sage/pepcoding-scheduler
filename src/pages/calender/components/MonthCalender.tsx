@@ -52,7 +52,13 @@ const MonthCalender: React.FunctionComponent<{
         {Mlist.map((item, key) => {
           const today = key + 1 - day;
           return (
-            <div key={item.length + " " + key}>
+            <div
+              key={item.length + " " + key}
+              className={`${item.length === 0 ? "" : "hasClass"}  ${
+                today > 0 && today <= dated[4].daysInMonth() ? "" : "notInMonth"
+              }
+              `}
+            >
               <div className="monthtop">
                 {" "}
                 {today > 0 && today <= dated[4].daysInMonth() ? today : ""}

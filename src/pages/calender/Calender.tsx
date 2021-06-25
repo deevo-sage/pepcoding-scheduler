@@ -29,7 +29,7 @@ const Calender: React.FunctionComponent<calenderinterface> = ({ teachers }) => {
       setTeacher(teachers[0]);
     }
   }, [teachers]);
-  React.useEffect(() => {
+  const getWclasses = () => {
     if (teacher.name != null) {
       if (teacher.name === "all") {
         actions.classaction
@@ -52,6 +52,9 @@ const Calender: React.FunctionComponent<calenderinterface> = ({ teachers }) => {
             console.log(err);
           });
     }
+  };
+  React.useEffect(() => {
+    getWclasses();
   }, [teacher]);
   React.useEffect(() => {
     let x = [0, 0];
@@ -71,6 +74,7 @@ const Calender: React.FunctionComponent<calenderinterface> = ({ teachers }) => {
           setshowModal={setshowModal}
           teachers={teachers}
           classes={Wclasses}
+          getWclasses={getWclasses}
         />
       </Modal>
       <div className="topBar">
@@ -110,7 +114,7 @@ const Calender: React.FunctionComponent<calenderinterface> = ({ teachers }) => {
         )}
         {teacher && (
           <div>
-            <b>Class Per Week</b>: {counts[0]}
+            <b>Weekly Classes</b>: {counts[0]}
           </div>
         )}
         {teacher && (

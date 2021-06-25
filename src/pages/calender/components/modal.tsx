@@ -27,8 +27,9 @@ export const ModalBody: React.FunctionComponent<{
   setshowModal: Function;
   teachers: Teacher[];
   classes: classes[];
+  getWclasses: Function;
   dated: moment.Moment;
-}> = ({ setshowModal, showModal, teachers, dated }) => {
+}> = ({ setshowModal, showModal, teachers, dated, getWclasses }) => {
   const [teacher, setteacher] = React.useState<Teacher>({
     name: null,
     id: null,
@@ -54,9 +55,7 @@ export const ModalBody: React.FunctionComponent<{
   React.useEffect(() => {
     if (teachers[0]) setteacher(teachers[0]);
   }, [teachers]);
-  // React.useEffect(() => {
-  //   console.log(`${moment(date + " " + starttime).toDate()}`);
-  // });
+
   const submitHandler = async () => {
     const classes: classes[] = (
       await actions.classaction.getteacher(teacher.id)
@@ -81,45 +80,18 @@ export const ModalBody: React.FunctionComponent<{
           "hh:mm"
         );
       if (!i.repeating) {
-        // console.log(
-        //   times.hour(),
-        //   stime.hour(),
-        //   etime.hour(),
-        //   times.isBetween(stime, etime, "hour"),
-        //   timee.isBetween(stime, etime, "hour"),
-        //   key
-        // );
-
         if (
           times.isBetween(stime, etime) ||
-          timee.isBetween(stime, etime) &&
-          // timee.hour() === etime.hour() ||
-          // timee.hour() === stime.hour() ||
-          // times.hour() === etime.hour() ||
-          // times.hour() === stime.hour() ||
-          ((hourcheckstart.isBefore(starthourcheck) ||
-            hourcheckstart.hour() === starthourcheck.hour()) &&
+          (timee.isBetween(stime, etime) &&
+            (hourcheckstart.isBefore(starthourcheck) ||
+              hourcheckstart.hour() === starthourcheck.hour()) &&
             (hourcheckend.isAfter(endhourcheck) ||
               hourcheckend.hour() === endhourcheck.hour()))
         ) {
           flag = true;
         }
       } else {
-        // console.log(
-        //   times.isBetween(stime, etime, "hour"),
-        //   timee.isBetween(stime, etime, "hour"),
-        //   timee.hour() === etime.hour(),
-        //   timee.hour() === stime.hour(),
-        //   times.hour() === etime.hour(),
-        //   times.hour() === stime.hour(),
-        //   "b",
-        //   key,
-        //   stime.day(),
-        //   times.day()
-        // );
         if (stime.day() === times.day()) {
-          // console.log(`${times.hour() + ":" + times.minute()}`);
-
           console.log(
             hourcheckstart.isBetween(starthourcheck, endhourcheck),
             hourcheckend.isBetween(starthourcheck, endhourcheck)
@@ -127,10 +99,6 @@ export const ModalBody: React.FunctionComponent<{
           if (
             hourcheckstart.isBetween(starthourcheck, endhourcheck) ||
             hourcheckend.isBetween(starthourcheck, endhourcheck) ||
-            // timee.hour() === etime.hour() ||
-            // timee.hour() === stime.hour() ||
-            // times.hour() === etime.hour() ||
-            // times.hour() === stime.hour() ||
             ((hourcheckstart.isBefore(starthourcheck) ||
               hourcheckstart.hour() === starthourcheck.hour()) &&
               (hourcheckend.isAfter(endhourcheck) ||
@@ -142,14 +110,16 @@ export const ModalBody: React.FunctionComponent<{
       }
     });
     if (!flag) {
-        const res = await actions.classaction.createclass({
-          teacherID: teacher.id,
-          starttime: `${times.toDate()}`,
-          endtime: `${timee.toDate()}`,
-          repeating,
-        });
-        console.log(res.data);
+      const res = await actions.classaction.createclass({
+        teacherID: teacher.id,
+        starttime: `${times.toDate()}`,
+        endtime: `${timee.toDate()}`,
+        repeating,
+      });
+      console.log(res.data);
       console.log("done");
+      getWclasses();
+      setshowModal(!showModal);
     } else {
       alert("class overlaps with a teachers already existing class");
     }
