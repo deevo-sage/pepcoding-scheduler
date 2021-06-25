@@ -43,8 +43,9 @@ b {
   overflow: hidden;
   background-color: rgba($color: $bG500, $alpha: 0.7);
   & > div {
-    background-color: wheat;
+    background-color: $yellow;
     width: 80%;
+    border-radius: 25px;
     max-width: 800px;
     height: 80%;
   }

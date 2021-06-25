@@ -264,6 +264,9 @@
   .close {
     align-items: flex-end;
     & > div {
+      margin-right: 1rem;
+      margin-top: 0.3rem;
+
       width: 2rem;
       height: 2rem;
       display: grid;
@@ -302,11 +305,12 @@
     .buttoncont {
       align-items: center;
       .submitButton {
-        padding: 0.3rem;
+        padding: 0.3rem 1.5rem;
         border-radius: 10px;
         font-size: 16px;
         font-weight: 700;
-        background-color: cadetblue;
+        background-color: $cyan700;
+        color: $bG50;
         cursor: pointer;
         user-select: none;
         &:hover {

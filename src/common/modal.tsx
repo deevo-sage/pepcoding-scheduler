@@ -10,7 +10,10 @@ export const Modal: React.FunctionComponent<{
     config: config.gentle,
   });
   return (
-    <animated.div style={animation} className="modalWrapper">
+    <animated.div
+      style={{ ...animation, transition: "0s" }}
+      className="modalWrapper"
+    >
       <div>{children}</div>
     </animated.div>
   );
