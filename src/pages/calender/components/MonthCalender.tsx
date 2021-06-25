@@ -63,22 +63,26 @@ const MonthCalender: React.FunctionComponent<{
                 {" "}
                 {today > 0 && today <= dated[4].daysInMonth() ? today : ""}
               </div>{" "}
-              <div className="monthbottom">
-                {item.map((item, key) => {
-                  const times = moment(item.startTime),
-                    timee = moment(item.endTime);
-                  return (
-                    <div key={item.name + item.subject + key}>
-                      {item.subject === "JavaScript"
-                        ? "JS"
-                        : item.subject === "python"
-                        ? "Py"
-                        : item.subject}
-                      ({times.format("hh:mm") + "-" + timee.format("hh:mm")})
-                    </div>
-                  );
-                })}
-              </div>
+              {today > 0 && today <= dated[4].daysInMonth() ? (
+                <div className="monthbottom">
+                  {item.map((item, key) => {
+                    const times = moment(item.startTime),
+                      timee = moment(item.endTime);
+                    return (
+                      <div key={item.name + item.subject + key}>
+                        {item.subject === "JavaScript"
+                          ? "JS"
+                          : item.subject === "python"
+                          ? "Py"
+                          : item.subject}
+                        ({times.format("hh:mm") + "-" + timee.format("hh:mm")})
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           );
         })}
